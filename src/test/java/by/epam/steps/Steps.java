@@ -5,10 +5,14 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 
 import by.epam.driver.DriverSingleton;
+import by.epam.pages.AccommodationSearchPage;
+import by.epam.pages.BookingMainPage;
 
 public class Steps {
 	private WebDriver driver;
-
+	private BookingMainPage bookingMainPage;
+	private AccommodationSearchPage accommodationSearchPage;
+	
 	private final Logger logger = LogManager.getRootLogger();
 
 	public void initBrowser() {
@@ -17,5 +21,32 @@ public class Steps {
 
 	public void closeDriver() {
 		DriverSingleton.closeDriver();
+	}
+	
+	public void openStartPage() {
+		bookingMainPage = new BookingMainPage(driver);
+		bookingMainPage.openPage();
+	}
+
+	public void choosePlace(String place) {
+		bookingMainPage.inputPlace(place);
+	}
+
+	public void chooseStartEndDateForLiving(int startDay, String startMonthYear, int endDay, String endMonthYear) {
+		bookingMainPage.chooseStartEndDateForLiving(startDay, startMonthYear, endDay, endMonthYear);
+		
+	}
+
+	public void fillGuestsCount(String roomsCount, String adultCount, String childrenCount) {
+		bookingMainPage.fillGuestsCount(roomsCount, adultCount, childrenCount);
+	}
+
+	public int getCountRoomsList() {
+		bookingMainPage.checkPrice();
+		accommodationSearchPage = new AccommodationSearchPage(driver);
+		String text = accommodationSearchPage.getTextWithSizeSearch();
+		String[] textArray = text.split(" ");
+		int countRoomsList = Integer.valueOf(textArray[2]);
+		return countRoomsList;
 	}
 }
