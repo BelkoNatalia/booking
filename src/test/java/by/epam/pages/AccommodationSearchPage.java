@@ -29,6 +29,12 @@ public class AccommodationSearchPage extends AbstractPage {
 	@FindBy(xpath = "//div[@class=' filter_item   css-checkbox  ']/span[contains(text(),'Завтрак включен')]")
 	private WebElement checkBoxFiterBreakfast;  
 	
+	@FindBy(xpath = "//a[@title='Следующая страница']")
+	private WebElement btnNextPage;  
+	
+	@FindBys(@FindBy(xpath = "//a[@class='hotel_name_link url']/span[@data-et-click]"))
+	private List<WebElement> hotelsNames;  
+	
 	public AccommodationSearchPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(this.driver, this);
@@ -67,5 +73,18 @@ public class AccommodationSearchPage extends AbstractPage {
 		if (!checkBoxFiterBreakfast.isSelected()) {
 			checkBoxFiterBreakfast.click();
 		}
+	}
+
+	public List<String> getHotelNameListOnPage() {
+		List<String> textsList = new ArrayList<String>();
+		for(WebElement webElement: hotelsNames) {
+			String text = webElement.getText().trim();
+			textsList.add(text);
+		}
+		return textsList;
+	}
+
+	public void goToNextPage() {
+		btnNextPage.click();
 	}
 }

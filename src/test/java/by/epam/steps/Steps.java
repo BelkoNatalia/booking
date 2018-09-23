@@ -1,5 +1,6 @@
 package by.epam.steps;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
@@ -46,10 +47,6 @@ public class Steps {
 	public int getCountRoomsList() {
 		bookingMainPage.checkPrice();
 		accommodationSearchPage = new AccommodationSearchPage(driver);
-//		String text = accommodationSearchPage.getTextWithSizeSearch();
-//		String[] textArray = text.split(" ");
-//		int countRoomsList = Integer.valueOf(textArray[2]);
-//		return countRoomsList;
 		return getNumberAccommodationOptionsFound();
 	}
 
@@ -74,6 +71,19 @@ public class Steps {
 		int countRoomsList = Integer.valueOf(textArray[2]);
 		return countRoomsList;
 	}
-	
-	
+
+	public List<String> getHotelNameList(int pageCountForSearch) {
+		bookingMainPage.checkPrice();
+		accommodationSearchPage = new AccommodationSearchPage(driver);
+		List<String> allHotelNameList = new ArrayList<String>();
+		List<String> hotelNameListOnPage = accommodationSearchPage.getHotelNameListOnPage();
+		allHotelNameList.addAll(hotelNameListOnPage);
+		int i= 1;
+		while (i!=pageCountForSearch) {
+			accommodationSearchPage.goToNextPage();
+			allHotelNameList.addAll( accommodationSearchPage.getHotelNameListOnPage() );
+			i++;
+		}
+		return allHotelNameList;
+	}
 }
