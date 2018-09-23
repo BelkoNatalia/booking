@@ -11,7 +11,7 @@ import org.openqa.selenium.support.ui.Select;
 
 public class BookingMainPage extends AbstractPage {
 	private final Logger logger = LogManager.getRootLogger();
-	private final String BASE_URL = "https://www.booking.com/index.ru.html?label=gen173nr-1FCAEoggJCAlhYSDNYBGgliAEBmAEhuAEGyAEP2AEB6AEB-AELkgIBeagCAw&sid=af80a8f30babe186c94ed4d5206da12a&click_from_logo=1";
+	private final String BASE_URL = "https://www.booking.com/index.ru.html?label=gen173nr-1DCAEoggJCAlhYSDNYBGgliAEBmAEhuAEGyAEM2AED6AEBkgIBeagCAw&sid=af80a8f30babe186c94ed4d5206da12a&click_from_logo=1";
 //	private final String BASE_URL = "https://www.booking.com/index.ru.html?label=gen173nr-1BCAEoggJCAlhYSDNYBGgliAEBmAEhuAEGyAEP2AEB6AEBkgIBeagCAw;sid=bd4f4e1d3fc3352ca4d43caf22aeef50;keep_landing=1&sb_price_type=total&";
 
 	@FindBy(id = "ss")

@@ -23,10 +23,10 @@ public class DriverSingleton {
 
 	public static WebDriver getDriver() {
 		if (null == driver) {
-//			System.setProperty(WEBDRIVER_GECKO_DRIVER, GECKODRIVER_GECKODRIVER_EXE_PATH);
-//			driver = new ChromeDriver();
-            System.setProperty("webdriver.gecko.driver", "D:\\Наташка\\JAVA\\chromedriver\\geckodriver.exe");
-            driver = new FirefoxDriver();
+			System.setProperty(WEBDRIVER_GECKO_DRIVER, GECKODRIVER_GECKODRIVER_EXE_PATH);
+			driver = new ChromeDriver();
+//            System.setProperty("webdriver.gecko.driver", "D:\\Наташка\\JAVA\\chromedriver\\geckodriver.exe");
+//            driver = new FirefoxDriver();
 			driver.manage().timeouts().pageLoadTimeout(40, TimeUnit.SECONDS);
 			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 			driver.manage().window().maximize();

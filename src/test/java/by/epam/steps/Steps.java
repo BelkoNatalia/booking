@@ -46,10 +46,11 @@ public class Steps {
 	public int getCountRoomsList() {
 		bookingMainPage.checkPrice();
 		accommodationSearchPage = new AccommodationSearchPage(driver);
-		String text = accommodationSearchPage.getTextWithSizeSearch();
-		String[] textArray = text.split(" ");
-		int countRoomsList = Integer.valueOf(textArray[2]);
-		return countRoomsList;
+//		String text = accommodationSearchPage.getTextWithSizeSearch();
+//		String[] textArray = text.split(" ");
+//		int countRoomsList = Integer.valueOf(textArray[2]);
+//		return countRoomsList;
+		return getNumberAccommodationOptionsFound();
 	}
 
 	public List<String> getCheapRoomsWithCostOnFirstPage() {
@@ -58,6 +59,20 @@ public class Steps {
 		accommodationSearchPage.sortPacesByPrice();
 		List<String> priceList = accommodationSearchPage.getInfoAboutPrices();
 		return priceList;
+	}
+
+	public void applyFilterByHotelAndBreakfast() {
+		bookingMainPage.checkPrice();
+		accommodationSearchPage = new AccommodationSearchPage(driver);
+		accommodationSearchPage.applyFilterHotel();
+		accommodationSearchPage.applyFilterBreakfast();
+	}
+
+	public int getNumberAccommodationOptionsFound() {
+		String text = accommodationSearchPage.getTextWithSizeSearch();
+		String[] textArray = text.split(" ");
+		int countRoomsList = Integer.valueOf(textArray[2]);
+		return countRoomsList;
 	}
 	
 	
