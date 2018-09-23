@@ -11,7 +11,8 @@ import org.openqa.selenium.support.ui.Select;
 
 public class BookingMainPage extends AbstractPage {
 	private final Logger logger = LogManager.getRootLogger();
-	private final String BASE_URL = "https://www.booking.com/index.ru.html?label=gen173nr-1BCAEoggJCAlhYSDNYBGgliAEBmAEhuAEGyAEP2AEB6AEBkgIBeagCAw;sid=bd4f4e1d3fc3352ca4d43caf22aeef50;keep_landing=1&sb_price_type=total&";
+	private final String BASE_URL = "https://www.booking.com/index.ru.html?label=gen173nr-1FCAEoggJCAlhYSDNYBGgliAEBmAEhuAEGyAEP2AEB6AEB-AELkgIBeagCAw&sid=af80a8f30babe186c94ed4d5206da12a&click_from_logo=1";
+//	private final String BASE_URL = "https://www.booking.com/index.ru.html?label=gen173nr-1BCAEoggJCAlhYSDNYBGgliAEBmAEhuAEGyAEP2AEB6AEBkgIBeagCAw;sid=bd4f4e1d3fc3352ca4d43caf22aeef50;keep_landing=1&sb_price_type=total&";
 
 	@FindBy(id = "ss")
 	private WebElement txtPlace;
@@ -50,19 +51,6 @@ public class BookingMainPage extends AbstractPage {
 		txtPlace.sendKeys(place);
 	}
 
-	public void chooseArrivalDate(int day, String month, String year) {
-		calendar.click();
-		String xpath = "//div[@data-calendar2-type='checkin']/..//th[text()='" + month + " " + year + "']";
-		WebElement monthYear = driver.findElement(By.xpath(xpath));
-		while (!monthYear.isDisplayed()) {
-			By nextMonth = By.xpath("//div[@class='bui-calendar__control bui-calendar__control--next']");
-			WebElement next = driver.findElement(nextMonth);
-			next.click();
-			System.out.println("I am not tyta");
-		}
-
-	}
-
 	public void chooseStartEndDateForLiving(int startDay, String startMonthYear, int endDay, String endMonthYear) {
 		calendar.click();
 		String xpathStart = "//div[text()='" + startMonthYear + "']";
@@ -72,7 +60,7 @@ public class BookingMainPage extends AbstractPage {
 			next.click();
 		}
 
-		String xpathStartDay = "//div[text()='Декабрь 2018']/..//td[text()=" + startDay + "]";
+		String xpathStartDay = "//div[text()='" + startMonthYear +"']/..//td[text()=" + startDay + "]";
 		WebElement elementStartDay = driver.findElement(By.xpath(xpathStartDay));
 		elementStartDay.click();
 
@@ -83,7 +71,7 @@ public class BookingMainPage extends AbstractPage {
 			next.click();
 		}
 
-		String xpathEndDay = "//div[text()='Декабрь 2018']/..//td[text()=" + endDay + "]";
+		String xpathEndDay = "//div[text()='" + endMonthYear + "']/..//td[text()=" + endDay + "]";
 		WebElement elementEndDay = driver.findElement(By.xpath(xpathEndDay));
 		elementEndDay.click();
 	}

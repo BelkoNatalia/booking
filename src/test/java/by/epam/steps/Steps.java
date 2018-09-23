@@ -1,5 +1,7 @@
 package by.epam.steps;
 
+import java.util.List;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
@@ -49,4 +51,14 @@ public class Steps {
 		int countRoomsList = Integer.valueOf(textArray[2]);
 		return countRoomsList;
 	}
+
+	public List<String> getCheapRoomsWithCostOnFirstPage() {
+		bookingMainPage.checkPrice();
+		accommodationSearchPage = new AccommodationSearchPage(driver);
+		accommodationSearchPage.sortPacesByPrice();
+		List<String> priceList = accommodationSearchPage.getInfoAboutPrices();
+		return priceList;
+	}
+	
+	
 }
