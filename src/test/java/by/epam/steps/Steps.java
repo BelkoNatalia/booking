@@ -2,6 +2,7 @@ package by.epam.steps;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -11,12 +12,16 @@ import by.epam.driver.DriverSingleton;
 import by.epam.pages.AccommodationSearchPage;
 import by.epam.pages.BookingMainPage;
 import by.epam.pages.HotelTypesPage;
+import by.epam.pages.SearchResultTaxiPage;
+import by.epam.pages.TaxiPage;
 
 public class Steps {
 	private WebDriver driver;
 	private BookingMainPage bookingMainPage;
 	private AccommodationSearchPage accommodationSearchPage;
 	private HotelTypesPage hotelTypesPage;
+	private TaxiPage taxiPage;
+	private SearchResultTaxiPage searchResultTaxiPage;
 	
 	private final Logger logger = LogManager.getRootLogger();
 
@@ -98,4 +103,31 @@ public class Steps {
 		List<String> hotelTypesList = hotelTypesPage.getHotelTypesListOnPage();
 		return hotelTypesList;
 	}
+
+	public void goToTaxiPage() {
+		bookingMainPage.goToTaxiPage();
+		
+		Set<String> namesTabs = driver.getWindowHandles();
+		List<String> tabNames = new ArrayList<String>(namesTabs);
+		driver.switchTo().window(tabNames.get(1));
+		
+		taxiPage = new TaxiPage(driver);
+	}
+
+	public void fillTaxiForm(String placeFrom, String placeTo, String day, String monthYear, String hour, String passengers) {
+		taxiPage.fillPlaceFrom(placeFrom);
+		taxiPage.fillPlaceTo(placeTo);
+		taxiPage.fillDate(day, monthYear);
+		taxiPage.fillTime(hour);
+		taxiPage.fillPassengers(passengers);
+		taxiPage.pressSearch();
+		searchResultTaxiPage = new SearchResultTaxiPage(driver);
+		
+	}
+
+	public int getCountOfCars() {
+		return searchResultTaxiPage.getNumberOfOffers();
+		
+	}
+
 }

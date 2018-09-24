@@ -37,6 +37,9 @@ public class BookingMainPage extends AbstractPage {
 	
 	@FindBy(xpath = "//a[contains(text(),'Уникальное жилье')]")
 	private WebElement linkUniquePlacesToStay;
+	
+	@FindBy(xpath = "//span[text()='Такси от/до аэропорта']")
+	private WebElement linkTaxiPage;
 
 	public BookingMainPage(WebDriver driver) {
 		super(driver);
@@ -98,5 +101,9 @@ public class BookingMainPage extends AbstractPage {
 
 	public void goToHotelTypePage() {
 		linkUniquePlacesToStay.click();
+	}
+
+	public void goToTaxiPage() {
+		linkTaxiPage.click();
 	}
 }

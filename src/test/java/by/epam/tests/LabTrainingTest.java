@@ -101,6 +101,22 @@ public class LabTrainingTest {
 		Assert.assertTrue(isCorrect);
 	}
 	
+	@Test(description = "sixth test")
+	public void findAnyTaxi() {
+		steps.openStartPage();
+		steps.goToTaxiPage();
+		String placeFrom = "Минск международный аэропорт";
+		String placeTo = "Минск-Пассажирский";
+		String day = "20";
+		String monthYear = "Октябрь 2018";
+		String hour = "13";
+		String passengers = "3";
+		steps.fillTaxiForm(placeFrom, placeTo, day, monthYear, hour, passengers);
+		int countOfCars = steps.getCountOfCars();
+		
+		Assert.assertTrue(countOfCars>0);
+	}
+	
 	@AfterMethod(description = "Stop Browser")
 	public void stopBrowser() {
 		steps.closeDriver();
