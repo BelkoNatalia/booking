@@ -1,5 +1,6 @@
 package by.epam.pages;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
@@ -16,6 +17,9 @@ public class SearchResultTaxiPage extends AbstractPage {
 	
 	@FindBys(@FindBy(xpath = "//div[@class='rw-search-result']"))
 	private List<WebElement> webElementCarList;
+	
+	@FindBys(@FindBy(xpath = "//h2[@class='rw-search-result__title rw-u-mt0 rw-u-mb']"))
+	private List<WebElement> webElementTypeCarList;
 
 	public SearchResultTaxiPage(WebDriver driver) {
 		super(driver);
@@ -31,4 +35,12 @@ public class SearchResultTaxiPage extends AbstractPage {
 		return webElementCarList.size();
 	}
 
+	public List<String> getCarTypeListOnPage() {
+		List<String> carsTypesList = new ArrayList<String>();
+		for(WebElement webElement: webElementTypeCarList) {
+			String text = webElement.getText();
+			carsTypesList.add(text);
+		}
+		return carsTypesList;
+	}
 }

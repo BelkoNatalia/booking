@@ -7,7 +7,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class TaxiPage extends AbstractPage {
 	
@@ -45,48 +47,32 @@ public class TaxiPage extends AbstractPage {
 	@Override
 	public void openPage() {
 		logger.info("Taxi page opened");
-		
 	}
 
 	public void fillPlaceFrom(String placeFrom) {
 		txtPlaceFrom.clear();
 		txtPlaceFrom.sendKeys(placeFrom);
-		try {
-			Thread.sleep(2500);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		WebDriverWait wait = new WebDriverWait(driver, 20);
 
 		String xpathPlaceFrom = "//div[contains(text(),'" + placeFrom + "') ]";
-		WebElement elementPlaceFrom = driver.findElement(By.xpath(xpathPlaceFrom));
+		
+		WebElement elementPlaceFrom = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpathPlaceFrom)));
 		elementPlaceFrom.click();
 	}
 
 	public void fillPlaceTo(String placeTo) {
 		txtPlaceTo.clear();
 		txtPlaceTo.sendKeys(placeTo);
+		WebDriverWait wait = new WebDriverWait(driver, 20);
 		
-		try {
-			Thread.sleep(2500);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		String xpathPlaceTo = "//div[contains(text(),'" + placeTo + "') ]";
-		WebElement elementPlaceTo = driver.findElement(By.xpath(xpathPlaceTo));
+		WebElement elementPlaceTo = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpathPlaceTo)));
 		elementPlaceTo.click();
 	}
 
 	public void fillDate(String day, String monthYear) {
 		tableDate.click();
-		try {
-			Thread.sleep(2500);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
+				
 		String xpathMonthYear = "//caption[text()='" + monthYear + "']";
 
 		while (driver.findElements(By.xpath(xpathMonthYear)).isEmpty()) {
@@ -97,7 +83,6 @@ public class TaxiPage extends AbstractPage {
 		String xpathDay = "//td/a[text()='" + day + "']";
 		WebElement elementDay = driver.findElement(By.xpath(xpathDay));
 		elementDay.click();
-
 	}
 
 	public void fillTime(String hour) {
@@ -115,6 +100,4 @@ public class TaxiPage extends AbstractPage {
 	public void pressSearch() {
 		btnSearch.click();
 	}
-
-	
 }

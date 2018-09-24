@@ -117,6 +117,24 @@ public class LabTrainingTest {
 		Assert.assertTrue(countOfCars>0);
 	}
 	
+	@Test(description = "seventh test")
+	public void findExecutiveTaxi() {
+		steps.openStartPage();
+		steps.goToTaxiPage();
+		String placeFrom = "Минск международный аэропорт";
+		String placeTo = "Минск-Пассажирский";
+		String day = "20";
+		String monthYear = "Октябрь 2018";
+		String hour = "13";
+		String passengers = "3";
+		steps.fillTaxiForm(placeFrom, placeTo, day, monthYear, hour, passengers);
+		
+		String basecarType = "Представительский";
+		List<String> carTypeList = steps.getCarTypeList();
+
+		Assert.assertTrue(carTypeList.contains(basecarType));
+	}
+		
 	@AfterMethod(description = "Stop Browser")
 	public void stopBrowser() {
 		steps.closeDriver();

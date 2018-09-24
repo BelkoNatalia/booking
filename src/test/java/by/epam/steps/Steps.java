@@ -130,4 +130,9 @@ public class Steps {
 		
 	}
 
+	public List<String> getCarTypeList() {
+		List<String> carTypeList = searchResultTaxiPage.getCarTypeListOnPage();
+		return carTypeList;
+	}
+
 }
