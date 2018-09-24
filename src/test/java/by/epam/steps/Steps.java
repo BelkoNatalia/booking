@@ -10,11 +10,13 @@ import org.openqa.selenium.WebDriver;
 import by.epam.driver.DriverSingleton;
 import by.epam.pages.AccommodationSearchPage;
 import by.epam.pages.BookingMainPage;
+import by.epam.pages.HotelTypesPage;
 
 public class Steps {
 	private WebDriver driver;
 	private BookingMainPage bookingMainPage;
 	private AccommodationSearchPage accommodationSearchPage;
+	private HotelTypesPage hotelTypesPage;
 	
 	private final Logger logger = LogManager.getRootLogger();
 
@@ -85,5 +87,15 @@ public class Steps {
 			i++;
 		}
 		return allHotelNameList;
+	}
+
+	public void goToHotelTypePage() {
+		bookingMainPage.goToHotelTypePage();
+	}
+
+	public List<String> getHotelsTypes() {
+		hotelTypesPage = new HotelTypesPage(driver);
+		List<String> hotelTypesList = hotelTypesPage.getHotelTypesListOnPage();
+		return hotelTypesList;
 	}
 }

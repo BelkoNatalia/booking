@@ -1,5 +1,6 @@
 package by.epam.tests;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.testng.Assert;
@@ -76,6 +77,28 @@ public class LabTrainingTest {
 		List<String> hotelNameList = steps.getHotelNameList(pageCountForSearch);
 		
 		Assert.assertTrue(hotelNameList.contains(hotelName));
+	}
+	
+	@Test(description = "fifth test")
+	public void checkHotelsTypes() {
+		List<String> baseHotelsTypes = new ArrayList<String>();
+		baseHotelsTypes.add("Глэмпинг");
+		baseHotelsTypes.add("Виллы");
+		baseHotelsTypes.add("Лоджи");
+		baseHotelsTypes.add("Шале");
+		steps.openStartPage();
+		steps.goToHotelTypePage();
+		List<String> hotelsTypesList = steps.getHotelsTypes();
+		
+		boolean isCorrect = true;
+		for (String hotelType: baseHotelsTypes) {
+			if (!hotelsTypesList.contains(hotelType)) {
+				isCorrect = false;
+				break;
+			}
+		}
+		
+		Assert.assertTrue(isCorrect);
 	}
 	
 	@AfterMethod(description = "Stop Browser")

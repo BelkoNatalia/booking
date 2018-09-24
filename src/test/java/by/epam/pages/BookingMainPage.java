@@ -34,6 +34,9 @@ public class BookingMainPage extends AbstractPage {
 
 	@FindBy(xpath = "//button[@data-sb-id='main']")
 	private WebElement btnSearch;
+	
+	@FindBy(xpath = "//a[contains(text(),'Уникальное жилье')]")
+	private WebElement linkUniquePlacesToStay;
 
 	public BookingMainPage(WebDriver driver) {
 		super(driver);
@@ -91,5 +94,9 @@ public class BookingMainPage extends AbstractPage {
 
 	public void checkPrice() {
 		btnSearch.click();
+	}
+
+	public void goToHotelTypePage() {
+		linkUniquePlacesToStay.click();
 	}
 }

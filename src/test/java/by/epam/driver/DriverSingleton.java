@@ -27,7 +27,7 @@ public class DriverSingleton {
 			driver = new ChromeDriver();
 //            System.setProperty("webdriver.gecko.driver", "D:\\Наташка\\JAVA\\chromedriver\\geckodriver.exe");
 //            driver = new FirefoxDriver();
-			driver.manage().timeouts().pageLoadTimeout(40, TimeUnit.SECONDS);
+			driver.manage().timeouts().pageLoadTimeout(80, TimeUnit.SECONDS);
 			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 			driver.manage().window().maximize();
 			logger.info("Browser started");
